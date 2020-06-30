@@ -7,14 +7,22 @@
 //
 
 import UIKit
+//TODO: 0- import User Notification Framework
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        //TODO: 1- get reference
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        //TODO: 2- request authorization
+        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if granted && error == nil {
+                print("Permission Granted")
+            }
+        }
         return true
     }
 
