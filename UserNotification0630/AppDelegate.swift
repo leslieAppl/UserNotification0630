@@ -18,7 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationCenter = UNUserNotificationCenter.current()
         
         //TODO: 2- request authorization
-        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+        ///User Notification
+//        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+//            if granted && error == nil {
+//                print("Permission Granted")
+//            }
+//        }
+        
+        ///Provisional Notification: Deliver Quietly - Step 1
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .provisional]) { (granted, error) in
             if granted && error == nil {
                 print("Permission Granted")
             }

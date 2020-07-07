@@ -26,14 +26,27 @@ class ViewController: UIViewController {
     @IBAction func saveNotification(_ sender: UIButton) {
 
         //TODO: 2- get notification authorization status from the user
+        ///User Notification
+//        notificationCenter.getNotificationSettings { (settings) in
+//            if settings.authorizationStatus == .authorized{
+//                let main = OperationQueue.main
+//                main.addOperation {
+//                    self.sendNotification()
+//                }
+//            }
+//        }
+        
+        ///Provisional Notification: Deliver Quietly - Step 2
         notificationCenter.getNotificationSettings { (settings) in
-            if settings.authorizationStatus == .authorized {
+            let status = settings.authorizationStatus
+            if status == .authorized || status == .provisional {
                 let main = OperationQueue.main
                 main.addOperation {
                     self.sendNotification()
                 }
             }
         }
+
     }
     
     func sendNotification() {
