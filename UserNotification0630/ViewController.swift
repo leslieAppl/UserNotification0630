@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var messageField: UITextField!
     
     var notificationCenter: UNUserNotificationCenter!
+    var count: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +51,21 @@ class ViewController: UIViewController {
     }
     
     func sendNotification() {
+        ///Custom Notification Groups -1
+        var groupID = "Group One"
+        if count >= 2 {
+            groupID = "Group Tow"
+        }
+        count += 1
+        
         //TODO: 3- init notification content
         let content = UNMutableNotificationContent()
         content.title = "Reminder"
         content.body = self.messageField.text!
-        print(content.body)
 //        content.sound = UNNotificationSound.default
         content.sound = UNNotificationSound(named: UNNotificationSoundName("alarm.mp3"))
+        ///Custom Notification Groups -2
+        content.threadIdentifier = groupID
         
         //TODO: 4- init notification trigger
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)

@@ -7,3 +7,7 @@
 ### To get the app to post provisional notifications, all we have to do is to add the provisional option to the requestAutorization() method.
 
 
+## Custom Notification Groups
+### content.threadIdentifier
+
+
