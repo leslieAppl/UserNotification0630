@@ -37,7 +37,8 @@ class ViewController: UIViewController {
 //            }
 //        }
         
-        ///Provisional Notification: Deliver Quietly - Step 2
+        //TODO: (Optional) Provisional Notification: Deliver Quietly
+        ///Step 2
         notificationCenter.getNotificationSettings { (settings) in
             let status = settings.authorizationStatus
             if status == .authorized || status == .provisional {
@@ -90,4 +91,13 @@ class ViewController: UIViewController {
     }
     
 }
-
+//TODO: (Optional) Showing notifications when the app is being used
+extension ViewController: UNUserNotificationCenterDelegate {
+    ///1- adopted UNUserNotificationCenterDelegate protocol and implemented userNotificationCenter() method
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        ///show alert notifications
+        completionHandler([.alert])
+        
+    }
+}
