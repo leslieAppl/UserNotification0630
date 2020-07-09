@@ -8,17 +8,46 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
+    ///Important:
+    ///After iOS 13: The start point to configure Scene
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        //TODO: 1- get reference
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        //TODO: 2- request authorization
+        ///User Notification
+        //        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+        //            if granted && error == nil {
+        //                print("Permission Granted")
+        //            }
+        //        }
+        
+        //TODO: (Optional) Provisional Notification: Deliver Quietly
+        ///Step 1
+        //        notificationCenter.requestAuthorization(options: [.alert, .sound, .provisional]) { (granted, error) in
+        //            if granted && error == nil {
+        //                print("Permission Granted")
+        //            }
+        //        }
+
+        //TODO: (Optional) Showing notifications when the app is being used
+        ///2- Assigning the ViewController class as the delegate
+        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if granted && error == nil {
+                let main = OperationQueue.main
+                main.addOperation {
+                    notificationCenter.delegate = self.window?.rootViewController as! ViewController
+                }
+            }
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

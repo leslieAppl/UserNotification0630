@@ -14,9 +14,12 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
+    ///Important:
+    ///Before iOS 12: The start point to configure Widows
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         //TODO: 1- get reference
-        let notificationCenter = UNUserNotificationCenter.current()
+//        let notificationCenter = UNUserNotificationCenter.current()
         
         //TODO: 2- request authorization
         ///User Notification
@@ -36,21 +39,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //TODO: (Optional) Showing notifications when the app is being used
         ///2- Init the window object and set up its own root view controller
-        let vc = ViewController()
-        let frame = UIScreen.main.bounds
-        window = UIWindow(frame: frame)
-        window!.rootViewController = vc
-        window!.makeKeyAndVisible()
-
-        ///3- Assigning the ViewController class as the delegate
-        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-            if granted && error == nil {
-                let main = OperationQueue.main
-                main.addOperation {
-                    notificationCenter.delegate = self.window?.rootViewController as! ViewController
-                }
-            }
-        }
+//        let vc = ViewController()
+//        let frame = UIScreen.main.bounds
+//        window = UIWindow(frame: frame)
+//        window!.rootViewController = vc
+//        window!.makeKeyAndVisible()
+//
+//        ///3- Assigning the ViewController class as the delegate
+//        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+//            if granted && error == nil {
+//                let main = OperationQueue.main
+//                main.addOperation {
+//                    notificationCenter.delegate = self.window?.rootViewController as! ViewController
+//                }
+//            }
+//        }
         
         return true
     }
