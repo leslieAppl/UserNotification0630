@@ -28,26 +28,27 @@ class ViewController: UIViewController {
 
         //TODO: 2- get notification authorization status from the user
         ///User Notification
+        notificationCenter.getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized{
+                let main = OperationQueue.main
+                main.addOperation {
+//                    self.sendNotification()
+                    self.sendNotification2()
+                }
+            }
+        }
+        
+        //TODO: (Optional) Provisional Notification: Deliver Quietly
+        ///Step 2
 //        notificationCenter.getNotificationSettings { (settings) in
-//            if settings.authorizationStatus == .authorized{
+//            let status = settings.authorizationStatus
+//            if status == .authorized || status == .provisional {
 //                let main = OperationQueue.main
 //                main.addOperation {
 //                    self.sendNotification()
 //                }
 //            }
 //        }
-        
-        //TODO: (Optional) Provisional Notification: Deliver Quietly
-        ///Step 2
-        notificationCenter.getNotificationSettings { (settings) in
-            let status = settings.authorizationStatus
-            if status == .authorized || status == .provisional {
-                let main = OperationQueue.main
-                main.addOperation {
-                    self.sendNotification()
-                }
-            }
-        }
 
     }
     
@@ -93,11 +94,49 @@ class ViewController: UIViewController {
 }
 //TODO: (Optional) Showing notifications when the app is being used
 extension ViewController: UNUserNotificationCenterDelegate {
+    
+    //MARK: - UNUserNotificationCenterDelegate method
     ///1- adopted UNUserNotificationCenterDelegate protocol and implemented userNotificationCenter() method
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        ///show alert notifications
+        ///Calling the completionHandler() method, to show alert notifications.
         completionHandler([.alert])
         
+    }
+}
+
+//TODO: (Optional) Actionable Notifications
+///Adding and processing actions for notifications
+extension ViewController {
+    func sendNotification2() {
+        let actionDelete = UNNotificationAction(identifier: "deleteButton", title: "Delete", options: .destructive)
+        let category = UNNotificationCategory(identifier: "listActions", actions: [actionDelete], intentIdentifiers: [], options: [])
+        notificationCenter.setNotificationCategories([category])
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Reminder"
+        content.body = messageField.text!
+        content.categoryIdentifier = "listActions"
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let id = "reminder-\(UUID())"
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { (error) in
+            let main = OperationQueue.main
+            main.addOperation {
+                self.messageField.text = ""
+            }
+        }
+    }
+    
+    //MARK: - UNUserNotificationCenterDelegate method
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let identifier = response.actionIdentifier
+        if identifier == "deleteButton" {
+            print("Delete Message")
+        }
+        
+        completionHandler() //Don't miss that
     }
 }

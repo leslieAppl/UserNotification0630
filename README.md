@@ -13,4 +13,7 @@
 ## Showing notifications when the app is being used
 ### The app delegate’s role changes from iOS 12 to iOS 13.
 
+## Actionable Notifications
+### Adding and processing actions for notifications
+
 

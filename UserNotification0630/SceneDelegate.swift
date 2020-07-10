@@ -23,19 +23,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //TODO: 2- request authorization
         ///User Notification
-        //        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-        //            if granted && error == nil {
-        //                print("Permission Granted")
-        //            }
-        //        }
+//        notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+//            if granted && error == nil {
+//                print("Permission Granted")
+//            }
+//        }
         
         //TODO: (Optional) Provisional Notification: Deliver Quietly
         ///Step 1
-        //        notificationCenter.requestAuthorization(options: [.alert, .sound, .provisional]) { (granted, error) in
-        //            if granted && error == nil {
-        //                print("Permission Granted")
-        //            }
-        //        }
+//        notificationCenter.requestAuthorization(options: [.alert, .sound, .provisional]) { (granted, error) in
+//            if granted && error == nil {
+//                print("Permission Granted")
+//            }
+//        }
 
         //TODO: (Optional) Showing notifications when the app is being used
         ///2- Assigning the ViewController class as the delegate
