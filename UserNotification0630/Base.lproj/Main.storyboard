@@ -22,7 +22,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xat-qq-hC2">
-                                <rect key="frame" x="168" y="485" width="133" height="33"/>
+                                <rect key="frame" x="161" y="485" width="140" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Save Notification"/>
                                 <connections>
@@ -40,6 +40,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Xat-qq-hC2" firstAttribute="leading" secondItem="sOu-bn-Ssb" secondAttribute="leading" constant="60" id="2T6-eS-HRq"/>
                             <constraint firstItem="sOu-bn-Ssb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CsC-uo-qPS"/>
                             <constraint firstItem="2LV-mb-BaZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="G8y-4y-tI5"/>
                             <constraint firstItem="2LV-mb-BaZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RxY-GF-dTb"/>
