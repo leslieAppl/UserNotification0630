@@ -109,8 +109,12 @@ extension ViewController: UNUserNotificationCenterDelegate {
 ///Adding and processing actions for notifications
 extension ViewController {
     func sendNotification2() {
+        ///processing an anction
         let actionDelete = UNNotificationAction(identifier: "deleteButton", title: "Delete", options: .destructive)
-        let category = UNNotificationCategory(identifier: "listActions", actions: [actionDelete], intentIdentifiers: [], options: [])
+        ///processing an input action
+        let actionInput = UNTextInputNotificationAction(identifier: "inputField", title: "Message", options: [])
+        
+        let category = UNNotificationCategory(identifier: "listActions", actions: [actionDelete, actionInput], intentIdentifiers: [], options: [])
         notificationCenter.setNotificationCategories([category])
         
         let content = UNMutableNotificationContent()
@@ -135,6 +139,9 @@ extension ViewController {
         let identifier = response.actionIdentifier
         if identifier == "deleteButton" {
             print("Delete Message")
+        }
+        else if identifier == "inputField" {
+            print("Send: \((response as! UNTextInputNotificationResponse).userText)")
         }
         
         completionHandler() //Don't miss that

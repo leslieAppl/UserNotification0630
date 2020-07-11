@@ -15,5 +15,5 @@
 
 ## Actionable Notifications
 ### Adding and processing actions for notifications
-
+### Processing an input action
 
